@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Task Manager</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-ygbV9kiqUc6oa4msXn9868pTtWMgiQaeYH7/t7LECLbyPA2x65Kgf80OJFdroafW"
+            crossorigin="anonymous"></script>
+    <style>
+        .in-progress, .done, .tools {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+
+<div>
+
+    <h2 style="text-align: center; margin: 100px">Task Manager</h2>
+
+    <div class="tools">
+        <a href="/addTask">Dodaj</a>
+    </div>
+
+    <div class="in-progress">
+
+        <h3>Lista zadań do wykonania: </h3>
+
+        <ul class="list-group">
+            <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.isDoneOrNot()} == false">
+                <div>
+                    <span th:text="${task.title} + |, data utworzenia zadania: | + ${task.createDate}"></span>
+                    <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edytuj zadanie</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="done" style="padding-top: 50px">
+        <h3>Wykonane zadania:</h3>
+
+        <ul class="list-group">
+            <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.isDoneOrNot()} == true">
+                <div>
+                    <span th:text="${task.title} + |, data utworzenia zadania: | + ${task.createDate}"></span>
+                    <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edytuj zadanie</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+</div>
+
+
+
+
+</body>
+</html>
