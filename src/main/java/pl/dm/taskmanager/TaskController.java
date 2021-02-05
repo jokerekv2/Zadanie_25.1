@@ -27,7 +27,6 @@ public class TaskController {
     }
 
 
-
 //    @GetMapping("/edit/{id}")
 //    public String editById(@PathVariable Long id, Model model) {
 //        Optional<Task> optionalTask = taskRepository.findById(id);
