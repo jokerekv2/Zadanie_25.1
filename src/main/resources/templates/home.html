@@ -23,31 +23,34 @@
     <h2 style="text-align: center; margin: 100px">Task Manager</h2>
 
     <div class="tools">
-        <a href="/addTask">Dodaj</a>
+        <a href="/addTask">Add Task</a>
     </div>
 
     <div class="in-progress">
 
-        <h3>Lista zadań do wykonania: </h3>
+        <h3>To Do: </h3>
 
         <ul class="list-group">
             <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.isDoneOrNot()} == false">
                 <div>
-                    <span th:text="${task.title} + |, data utworzenia zadania: | + ${task.createDate}"></span>
-                    <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edytuj zadanie</a>
+<!--                    <span th:text="${task.name} + |, data utworzenia zadania: | + ${task.createDate}"></span>-->
+                    <span style="text-align: left" th:text="${task.name}"></span>
+                    <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edit task</a>
+                    <span style="float:right" th:text="|Created Date: | + ${task.createDate}"></span>
                 </div>
             </li>
         </ul>
     </div>
 
     <div class="done" style="padding-top: 50px">
-        <h3>Wykonane zadania:</h3>
+        <h3>Done Tasks:</h3>
 
         <ul class="list-group">
             <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.isDoneOrNot()} == true">
                 <div>
-                    <span th:text="${task.title} + |, data utworzenia zadania: | + ${task.createDate}"></span>
-                    <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edytuj zadanie</a>
+                    <span style="text-align: left" th:text="${task.name}"></span>
+                    <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edit task</a>
+                    <span style="float:right" th:text="|Copletion Date: | + ${task.createDate}"></span>
                 </div>
             </li>
         </ul>

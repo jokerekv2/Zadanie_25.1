@@ -4,7 +4,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,15 +29,31 @@ public class TaskController {
     }
 
 
-//    @GetMapping("/edit/{id}")
-//    public String editById(@PathVariable Long id, Model model) {
-//        Optional<Task> optionalTask = taskRepository.findById(id);
-//        if (optionalTask.isPresent()) {
-//            optionalTask.
-//        } else {
-//            return "redirect:/";
-//        }
-//
-//    }
+    @GetMapping("/edit/{id}")
+    public String showById(@PathVariable Long id, Model model) {
+        Optional<Task> optionalTask = taskRepository.findById(id);
+        if (optionalTask.isPresent()) {
+            Task task = optionalTask.get();
+            model.addAttribute("task", task);
+            return "addOrEdit";
+        } else {
+            return "redirect:/";
+        }
+    }
 
+    @GetMapping("/addTask")
+    public String showById(Model model) {
+        Task task = new Task();
+        model.addAttribute("task", task);
+        return "addOrEdit";
+    }
+
+    @PostMapping("/task/edit")
+    public String editTas(Task task) {
+        if (task.getCreateDate() == null) {
+            task.setCreateDate(LocalDate.now());
+        }
+        taskRepository.save(task);
+        return "redirect:/";
+    }
 }

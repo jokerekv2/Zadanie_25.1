@@ -14,7 +14,7 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
+    private String name;
     private boolean doneOrNot;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
@@ -28,12 +28,12 @@ public class Task {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String title) {
+        this.name = title;
     }
 
     public boolean isDoneOrNot() {
