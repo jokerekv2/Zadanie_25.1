@@ -25,14 +25,13 @@
             <div id="nameInfo" class="form-text">Enter the name of the task.</div>
         </div>
 
-<!--        <div class="col-auto mb-3">-->
-<!--            <label class="visually-hidden" for="autoSizingSelect">Preference</label>-->
-<!--            <select class="form-select" id="autoSizingSelect">-->
-<!--                <option selected>Done or not?</option>-->
-<!--                <option th:field="*{doneOrNot}" th:value="true">Done!</option>-->
-<!--                <option th:field="*{doneOrNot}" th:value="false">To do</option>-->
-<!--            </select>-->
-<!--        </div>-->
+        <div class="col-auto mb-3">
+            <label class="visually-hidden" for="autoSizingSelect">Preference</label>
+            <select th:field="*{priority}" class="form-select" id="autoSizingSelect">
+                <option th:each="priorityValue : ${T(pl.dm.taskmanager.Priority).values()}"
+                        th:value="${priorityValue}" th:text="${priorityValue.getPriorityName()}"></option>
+            </select>
+        </div>
 
         <div class="form-check mb-3">
             <input th:field="*{doneOrNot}" class="form-check-input" type="checkbox" value="" id="flexCheckDefault">

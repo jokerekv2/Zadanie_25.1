@@ -19,22 +19,26 @@
 <body>
 
 <div>
-
     <h2 style="text-align: center; margin: 100px">Task Manager</h2>
 
-    <div class="tools">
-        <a href="/addTask">Add Task</a>
+    <div class="tools" style="padding-bottom: 30px">
+
+        <a style="float: left; color: forestgreen" href="/addTask">Add Task</a>
+        <div style="float: right" class="sorting">
+            <a href="/">All Tasks</a>
+            <div style="display: inline" th:each="priority : ${T(pl.dm.taskmanager.Priority).values()}">
+                <a th:href="|/?priority=| + ${priority.name()}" th:text="${priority.getPriorityName()}"></a>
+            </div>
+        </div>
     </div>
 
     <div class="in-progress">
-
         <h3>To Do: </h3>
-
         <ul class="list-group">
-            <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.isDoneOrNot()} == false">
+            <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.doneOrNot} == false">
                 <div>
-<!--                    <span th:text="${task.name} + |, data utworzenia zadania: | + ${task.createDate}"></span>-->
                     <span style="text-align: left" th:text="${task.name}"></span>
+                    <span style="padding-left: 10px; font-size: small" th:text="*{task.priority.getPriorityName()}"></span>
                     <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edit task</a>
                     <span style="float:right" th:text="|Created Date: | + ${task.createDate}"></span>
                 </div>
@@ -44,11 +48,11 @@
 
     <div class="done" style="padding-top: 50px">
         <h3>Done Tasks:</h3>
-
         <ul class="list-group">
-            <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.isDoneOrNot()} == true">
+            <li class="list-group-item" th:each="task: ${tasks}" th:if="${task.doneOrNot} == true">
                 <div>
                     <span style="text-align: left" th:text="${task.name}"></span>
+                    <span style="padding-left: 10px; font-size: small" th:text="*{task.priority.getPriorityName()}"></span>
                     <a th:href="|/edit/| + ${task.id}" style="padding-left: 10px; font-size: small">Edit task</a>
                     <span style="float:right" th:text="|Copletion Date: | + ${task.createDate}"></span>
                 </div>

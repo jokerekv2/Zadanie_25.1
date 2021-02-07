@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -20,11 +21,16 @@ public class TaskController {
     }
 
     @GetMapping("/")
-    public String home(Model model) {
+    public String home(Model model, @RequestParam(required = false) Priority priority) {
 
-        List<Task> tasks = taskRepository.findAll();
+        List<Task> tasks;
+        if (priority != null) {
+            tasks = taskRepository.findByPriority(priority);
+        } else {
+            tasks = taskRepository.findAll();
+        }
+
         model.addAttribute("tasks", tasks);
-
         return "home";
     }
 
