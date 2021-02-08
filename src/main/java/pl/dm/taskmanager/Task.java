@@ -12,7 +12,7 @@ public class Task {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    private boolean doneOrNot;
+    private boolean done;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createDate;
@@ -44,12 +44,12 @@ public class Task {
         this.name = title;
     }
 
-    public boolean isDoneOrNot() {
-        return doneOrNot;
+    public boolean isDone() {
+        return done;
     }
 
-    public void setDoneOrNot(boolean doneOrNot) {
-        this.doneOrNot = doneOrNot;
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     public LocalDate getCreateDate() {

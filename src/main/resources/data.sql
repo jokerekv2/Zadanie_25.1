@@ -1,4 +1,4 @@
-INSERT INTO task (name, done_or_not, create_date, priority)
+INSERT INTO task (name, done, create_date, priority)
 VALUES
 ('Wynieść śmieci', 'false', '2021-04-12', 'MEDIUM'),
 ('Zrobić zadanie', 'false', '2021-05-10', 'HIGH'),

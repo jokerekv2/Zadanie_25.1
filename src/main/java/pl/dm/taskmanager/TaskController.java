@@ -34,9 +34,21 @@ public class TaskController {
         return "home";
     }
 
+    @GetMapping("/show")
+    public String showByDoneStatus(Model model, @RequestParam Boolean done) {
+        List<Task> byDone = taskRepository.findByDone(done);
+        if (byDone != null) {
+            model.addAttribute("tasks", byDone);
+            return "showByDoneStatus";
+        } else {
+            return "redirect:/";
+        }
+
+    }
+
 
     @GetMapping("/edit/{id}")
-    public String showById(@PathVariable Long id, Model model) {
+    public String searchById(@PathVariable Long id, Model model) {
         Optional<Task> optionalTask = taskRepository.findById(id);
         if (optionalTask.isPresent()) {
             Task task = optionalTask.get();
@@ -48,14 +60,14 @@ public class TaskController {
     }
 
     @GetMapping("/addTask")
-    public String showById(Model model) {
+    public String addTask(Model model) {
         Task task = new Task();
         model.addAttribute("task", task);
         return "addOrEdit";
     }
 
     @PostMapping("/task/edit")
-    public String editTas(Task task) {
+    public String editTask(Task task) {
         if (task.getCreateDate() == null) {
             task.setCreateDate(LocalDate.now());
         }
