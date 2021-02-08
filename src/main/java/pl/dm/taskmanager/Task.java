@@ -2,10 +2,7 @@ package pl.dm.taskmanager;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
@@ -14,11 +11,22 @@ public class Task {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String title;
-    private boolean doneOrNot;
+    private String name;
+    private boolean done;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate createDate;
+
+    @Enumerated(EnumType.STRING)
+    private Priority priority;
+
+    public Priority getPriority() {
+        return priority;
+    }
+
+    public void setPriority(Priority priority) {
+        this.priority = priority;
+    }
 
     public Long getId() {
         return id;
@@ -28,20 +36,20 @@ public class Task {
         this.id = id;
     }
 
-    public String getTitle() {
-        return title;
+    public String getName() {
+        return name;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setName(String title) {
+        this.name = title;
     }
 
-    public boolean isDoneOrNot() {
-        return doneOrNot;
+    public boolean isDone() {
+        return done;
     }
 
-    public void setDoneOrNot(boolean doneOrNot) {
-        this.doneOrNot = doneOrNot;
+    public void setDone(boolean done) {
+        this.done = done;
     }
 
     public LocalDate getCreateDate() {
